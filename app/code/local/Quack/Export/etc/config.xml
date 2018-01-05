@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+ Este arquivo é parte do programa Quack Export
+
+ Quack Export é um software livre; você pode redistribuí-lo e/ou
+ modificá-lo dentro dos termos da Licença Pública Geral GNU como
+ publicada pela Fundação do Software Livre (FSF); na versão 3 da
+ Licença, ou (na sua opinião) qualquer versão.
+
+ Este programa é distribuído na esperança de que possa ser útil,
+ mas SEM NENHUMA GARANTIA; sem uma garantia implícita de ADEQUAÇÃO
+ a qualquer MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença
+ Pública Geral GNU para maiores detalhes.
+
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU junto
+ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
+
+ @category   Quack
+ @package    Quack_Export
+ @author     Rafael Patro <rafaelpatro@gmail.com>
+ @copyright  Copyright (c) 2015 Rafael Patro (rafaelpatro@gmail.com)
+ @license    http://www.gnu.org/licenses/gpl.txt
+ @link       https://github.com/rafaelpatro/Quack_Export
+-->
+<config>
+    <modules>
+        <Quack_Export>
+            <version>0.0.1</version>
+        </Quack_Export>
+    </modules>
+    <global>
+        <models>
+            <qcxport>
+                <class>Quack_Export_Model</class>
+            </qcxport>
+        </models>
+        <helpers>
+            <qcxport>
+                <class>Quack_Export_Helper</class>
+            </qcxport>
+        </helpers>
+        <blocks>
+             <qcxport>
+                <class>Quack_Export_Block</class>
+             </qcxport>
+        </blocks>
+    </global>
+	<frontend>
+        <routers>
+            <qcxport>
+                <use>standard</use>
+                <args>
+                    <module>Quack_Export</module>
+                    <frontName>qcxport</frontName>
+                </args>
+            </qcxport>
+        </routers>
+	</frontend>
+    <admin>
+        <routers>
+            <qcxportadmin>
+                <use>admin</use>
+                <args>
+                    <module>Quack_Export</module>
+                    <frontName>qcxportadmin</frontName>
+                </args>
+            </qcxportadmin>
+        </routers>
+    </admin>
+	<adminhtml>
+		<events>
+		</events>
+		<layout>
+			<updates>
+				<qcxport>
+					<file>qcxport.xml</file>
+				</qcxport>
+			</updates>
+		</layout>
+	</adminhtml>
+</config>

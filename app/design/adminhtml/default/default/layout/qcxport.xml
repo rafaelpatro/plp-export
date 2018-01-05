@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+ Este arquivo é parte do programa Quack Export
+
+ Quack Export é um software livre; você pode redistribuí-lo e/ou
+ modificá-lo dentro dos termos da Licença Pública Geral GNU como
+ publicada pela Fundação do Software Livre (FSF); na versão 3 da
+ Licença, ou (na sua opinião) qualquer versão.
+
+ Este programa é distribuído na esperança de que possa ser útil,
+ mas SEM NENHUMA GARANTIA; sem uma garantia implícita de ADEQUAÇÃO
+ a qualquer MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença
+ Pública Geral GNU para maiores detalhes.
+
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU junto
+ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
+
+ @category   Quack
+ @package    Quack_Export
+ @author     Rafael Patro <rafaelpatro@gmail.com>
+ @copyright  Copyright (c) 2015 Rafael Patro (rafaelpatro@gmail.com)
+ @license    http://www.gnu.org/licenses/gpl.txt
+ @link       https://github.com/rafaelpatro/Quack_Export
+-->
+<layout>
+
+    <qcxport_ordergrid_btn>
+    	<reference name="sales_order.grid">
+    		<action method="addExportType" translate="label">
+    			<url>qcxportadmin/export/plp/</url>
+    			<label>PLP (SIGEPWEB)</label>
+    		</action>
+    	</reference>
+    </qcxport_ordergrid_btn>
+
+	<adminhtml_sales_order_index>
+	
+		<update handle="qcxport_ordergrid_btn" />
+		
+		<reference name="head">
+			<block type="core/text" name="qcxport.head" output="toHtml">
+				<action method="setText">
+					<text>
+						<![CDATA[<script type="text/javascript">
+							var QuackExport = {
+								importPlp: function(elem) {
+									var qckForm = new Element('form', {enctype:'multipart/form-data', action:'/qcxportadmin/import/plp', method:'post'})
+									qckForm.insert(new Element('input', {type:'hidden', name:'form_key', value:FORM_KEY}));
+									qckForm.insert(new Element('input', {type:'file', name:'plp_file', style:'margin-left:5px;'}));
+									qckForm.insert(new Element('input', {type:'submit', value:'Enviar',  style:'margin-left:5px;', class:'form-button'}));
+									elem.insert({after:qckForm}).remove();
+								}
+							};
+						</script>]]>
+					</text>
+				</action>
+			</block>
+		</reference>
+		
+		<reference name="sales_order.grid.container">
+			<action method="addButton">
+				<id>plp-button-import</id>
+				<arguments>
+					<label>Importar PLP</label>
+					<onclick>QuackExport.importPlp(this)</onclick>
+				</arguments>
+			</action>
+		</reference>
+	</adminhtml_sales_order_index>
+	
+	<adminhtml_sales_order_grid>
+		<update handle="qcxport_ordergrid_btn" />
+	</adminhtml_sales_order_grid>
+</layout>
